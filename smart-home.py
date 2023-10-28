@@ -1,1 +1,1 @@
-51514515print("hello")
+print("hello")
