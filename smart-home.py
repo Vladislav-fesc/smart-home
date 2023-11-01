@@ -1,3 +1,4 @@
+import random
 '''import datetime
 def Signal:
     if signal == True:
@@ -10,3 +11,18 @@ def Signal:
             выключаем свет во всем доме и кондецианеры 
 
        '''
+class signall:
+    def __init__(self,singl):
+        self.lights = True
+        self.air_conditioner = True
+        self.signal= singl
+
+    def off(self,):
+        if self.signal == True:
+            print('Выключаем все кроме датчиков дыма буровня воды и сигнализациии')
+        else:
+            print('дом работает')
+test_list = [True,False]
+my_home = signall(test_list[random.randint(0,1)])
+my_home.off()
+
