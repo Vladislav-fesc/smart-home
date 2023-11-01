@@ -27,7 +27,7 @@ class signall:
         self.air_conditioner4 = True
         self.signal= singl
 
-    def off(self,):
+    def off(self):
         if self.signal == True:
             print('Выключаем все кроме датчиков дыма буровня воды и сигнализациии')
             self.lightscom1 = False
@@ -45,13 +45,25 @@ class signall:
         else:
             print('дом работает')
 class tempertur:
-    def __init1__(self,con1,con2 con3,con4):
+    def __init__(self,con1):
         self.air_conditioner1 = True
         self.air_conditioner2 = True
         self.air_conditioner3 = True
         self.air_conditioner4 = True
-
+        self.temp1=con1
+    def temperatur(self):
+        if self.temp1 >= 26:
+            print ("включить кондиционер на поижение температуры ")
+        elif self.temp1<=14:
+             print ("включить кондиционер на повышение температуры температуры ")
+        else:
+            print("выключить кондиционер")
+            self.air_conditioner1 = True
+    def conder(self):
+        self.air_conditioner4 =False
 test_list = [True,False]
 my_home = signall(test_list[random.randint(0,1)])
 my_home.off()
+temper = tempertur(13)
+temper.temperatur()
 
