@@ -44,6 +44,13 @@ class signall:
             self.air_conditioner4 =False
         else:
             print('дом работает')
+class tempertur:
+    def __init1__(self,con1,con2 con3,con4):
+        self.air_conditioner1 = True
+        self.air_conditioner2 = True
+        self.air_conditioner3 = True
+        self.air_conditioner4 = True
+
 test_list = [True,False]
 my_home = signall(test_list[random.randint(0,1)])
 my_home.off()
