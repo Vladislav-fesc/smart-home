@@ -1,5 +1,5 @@
 import random
-from Signall import signall
+from Class.Signall import signall
 class tempertur:
     def __init__(self,con1,con2,con3,con4):
         self.air_conditioner1 = True
