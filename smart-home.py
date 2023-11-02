@@ -1,16 +1,4 @@
 import random
-'''import datetime
-def Signal:
-    if signal == True:
-    Выключаем все кроме датчика воды в ваной 
-   '''
-    
-'''def time:
-    current_time = datetime.datetime.now().time()
-    if urrent_time >= datetime.time(22, 0) or current_time <= datetime.time(6, 0):
-            выключаем свет во всем доме и кондецианеры 
-
-       '''
 class signall:
     def __init__(self,singl):
         self.lightscom1 = True
@@ -98,7 +86,7 @@ class WindowSensor:
 
     def turn_on_air_conditioner(self):
         self.air_conditioner = True
-        print(" кондиционер работает")
+        print("кондиционер работает")
 
     def turn_off_air_conditioner(self):
         self.air_conditioner = False
