@@ -56,36 +56,36 @@ class tempertur:
         self.temp4=con4
     def temperatur(self):
         if self.temp1 >= 26:
-            print ("включить кондиционер на понижение температуры ")
+            print ("включить кондиционер на поижение температуры ")
         elif self.temp1<=14:
-             print ("включить кондиционер на повышение температуры ы ")
+             print ("включить кондиционер на повышение температуры температуры ")
         else:
             print("выключить кондиционер")
             self.air_conditioner1 = False
         if self.temp2>= 26:
-            print ("включить кондиционер на понижение температуры ")
+            print ("включить кондиционер на поижение температуры ")
         elif self.temp2<=14:
-             print ("включить кондиционер на повышение температуры")
+             print ("включить кондиционер на повышение температуры температуры ")
         else:
             print("выключить кондиционер")
             self.air_conditioner1 = False
         if self.temp3 >= 26:
-            print ("включить кондиционер на понижение температуры ")
+            print ("включить кондиционер на поижение температуры ")
         elif self.temp3<=14:
-             print ("включить кондиционер на повышение температуры ")
+             print ("включить кондиционер на повышение температуры температуры ")
         else:
             print("выключить кондиционер")
             self.air_conditioner1 = False
         if self.temp4 >= 26:
-            print ("включить кондиционер на понижение температуры ")
+            print ("включить кондиционер на поижение температуры ")
         elif self.temp4<=14:
-             print ("включить кондиционер на повышение температуры ")
+             print ("включить кондиционер на повышение температуры температуры ")
         else:
             print("выключить кондиционер")
             self.air_conditioner1 = False
 test_list = [True,False]
 my_home = signall(test_list[random.randint(0,1)])
 my_home.off()
-temper = tempertur(13,15,28,40)
+temper = tempertur(13,14,15,16)
 temper.temperatur()
 
