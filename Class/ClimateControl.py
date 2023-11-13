@@ -16,7 +16,7 @@ class tempertur:
         else:
             print("выключить кондиционер")
             self.air_conditioner1 = False
-        if self.temp2>= 26:
+        '''if self.temp2>= 26:
             print ("включить кондиционер на поижение температуры ")
         elif self.temp2<=14:
              print ("включить кондиционер на повышение температуры температуры ")
@@ -36,4 +36,4 @@ class tempertur:
              print ("включить кондиционер на повышение температуры температуры ")
         else:
             print("выключить кондиционер")
-            self.air_conditioner1 = False
+            self.air_conditioner1 = False'''
