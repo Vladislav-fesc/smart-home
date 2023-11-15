@@ -1,17 +1,17 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, redirect
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 from datetime import datetime
 import pandas as pd
+import random
 
 app = Flask(__name__)
 
 # Mockup данных с датчиков
-sensor_data = {
-    'temperature': [],
-    'humidity': [],
-}
+num_sensors = 4
+sensor_data = {f'temperature_{i}': [] for i in range(num_sensors)}
+sensor_colors = [f'#{random.randint(0, 0xFFFFFF):06x}' for _ in range(num_sensors)]
 
 light_status = False  # Статус света: выключен
 
@@ -23,12 +23,12 @@ def generate_plot():
     sensor_data['minutes'] = current_time.minute
 
     # Добавим данные в списки
-    sensor_data['temperature'].append(current_time.second % 30 + 20)
-    sensor_data['humidity'].append(current_time.second % 40 + 30)
+    for i in range(num_sensors):
+        sensor_data[f'temperature_{i}'].append(random.uniform(0, 50))
 
     # Ограничим количество точек на графике
     max_points = 10
-    if len(sensor_data['temperature']) > max_points:
+    if len(sensor_data['temperature_0']) > max_points:
         for key in sensor_data:
             sensor_data[key] = sensor_data[key][-max_points:]
 
@@ -37,10 +37,14 @@ def generate_plot():
 
     # Создаем график на основе данных с датчиков и времени
     fig, ax = plt.subplots()
-    df.plot(x='minutes', y=['temperature', 'humidity'], ax=ax)
-    ax.set_xlabel('Minutes')
-    ax.set_ylabel('Value')
-    ax.set_title('Sensor Data')
+    for i in range(num_sensors):
+        ax.plot(df['minutes'], df[f'temperature_{i}'], label=f'Sensor {i}', color=sensor_colors[i])
+
+    ax.set_xlabel('Time (minutes)')
+    ax.set_ylabel('Temperature (°C)')
+    ax.set_title('Temperature Sensor Data')
+    ax.legend()
+    ax.set_xlim(0, 10)  # Ограничение оси X от 0 до 10 минут (или установите нужные вам значения)
 
     # Сохраняем график в памяти
     img = BytesIO()
