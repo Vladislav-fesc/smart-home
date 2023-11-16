@@ -1,33 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensor Dashboard</title>
+    <title>Temperature Dashboard</title>
 </head>
 <body>
-    <h1>Sensor Dashboard</h1>
+    <h1>Temperature Dashboard</h1>
     
-    {% for i in range(4) %}
-        <h2>Temperature Sensor {{ i }}</h2>
-        <p>Current Temperature: {{ sensor_data[f'temperature_{i}'][-1] }} °C</p>
-        
-        <h3>Temperature History</h3>
-        <ul>
-            {% for temp in sensor_data[f'temperature_{i}'] %}
-                <li>{{ temp }} °C</li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
-
-    <h2>Light Control</h2>
-    <form action="/toggle_light" method="post">
-        <button type="submit">{{ 'Turn On' if not light_status else 'Turn Off' }} Light</button>
-    </form>
-
-    <h2>Temperature Sensor Data Plot</h2>
-    <img src="data:image/png;base64,{{ plot_data }}" alt="Temperature Sensor Data Plot">
-
+    <h2>Current Temperature</h2>
+    <p>Temperature: {{ temperature }} °C</p>
+    
+    <h2>Temperature Trends</h2>
+    <img src="/plot.png" alt="Temperature Trends">
 </body>
-</html>
 </html>
