@@ -2,22 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temperature Monitoring Panel</title>
+    <title>Показатели температуры</title>
 </head>
 <body>
-    <h1>Панель мониторинга температуры</h1>
-
-    <h2>Текущая температура</h2>
-    <p>Температура: {{ temperature }} °C</p>
-
-    <h2>Температурные тенденции</h2>
-    <img src="/plot.png" alt="Temperature Trends">
-
-    <h3>Дополнительные датчики</h3>
+    <h1>Показатели температуры</h1>
     <ul>
-        <!-- Можете добавить больше показаний, если необходимо -->
+        {% for time, temperature in zip(temperature_data['time'], temperature_data['temperature']) %}
+            <li>{{ time }} минута: {{ temperature }}°C</li>
+        {% endfor %}
     </ul>
+    <img src="data:image/png;base64,{{ plot_image }}" alt="График температуры">
 </body>
 </html>
+
