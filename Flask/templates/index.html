@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sensor Data</title>
+    <title>Smart-Home</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>Sensor Data</h1>
+    <h1>Система Smart-Home</h1>
 
-    <h2>Temperature Sensors</h2>
+    <h2>Показатели датчиков</h2>
     <ul>
-        <li>Temperature 1: <span id="temperature1"></span> °C</li>
-        <li>Temperature 2: <span id="temperature2"></span> °C</li>
-        <li>Temperature 3: <span id="temperature3"></span> °C</li>
-        <li>Temperature 4: <span id="temperature4"></span> °C</li>
+        <li>Температура датчика 1: <span id="temperature1"></span> °C</li>
+        <li>Температура датчика2: <span id="temperature2"></span> °C</li>
+        <li>Tемпература датчика 3: <span id="temperature3"></span> °C</li>
+        <li>Температура датчика 4: <span id="temperature4"></span> °C</li>
     </ul>
-
-    <h2>Light Control</h2>
-    <p>Light Status: <span id="light-status"></span></p>
-    <button onclick="updateData()">Toggle Light</button>
 
     <div id="plot"></div>
 
@@ -32,17 +28,50 @@
                     document.getElementById('temperature2').innerText = data.sensor_data.temperature2;
                     document.getElementById('temperature3').innerText = data.sensor_data.temperature3;
                     document.getElementById('temperature4').innerText = data.sensor_data.temperature4;
-                    document.getElementById('light-status').innerText = data.light_status ? 'On' : 'Off';
 
-                    Plotly.newPlot('plot', [{
-                        x: data.time_history,
-                        y: data.temperature_history,
-                        type: 'scatter',
-                        mode: 'lines+markers',
-                        name: 'Temperature'
-                    }], {title: 'Temperature History', xaxis: {title: 'Time'}, yaxis: {title: 'Temperature'}});
+                    // Plotly график
+                    Plotly.newPlot('plot', [
+                        {
+                            x: data.temperature_history.map(entry => entry.time),
+                            y: data.temperature_history.map(entry => entry.temperature1),
+                            type: 'scatter',
+                            mode: 'lines+markers',
+                            name: 'Temperature 1',
+                            line: { color: 'red' }
+                        },
+                        {
+                            x: data.temperature_history.map(entry => entry.time),
+                            y: data.temperature_history.map(entry => entry.temperature2),
+                            type: 'scatter',
+                            mode: 'lines+markers',
+                            name: 'Temperature 2',
+                            line: { color: 'blue' }
+                        },
+                        {
+                            x: data.temperature_history.map(entry => entry.time),
+                            y: data.temperature_history.map(entry => entry.temperature3),
+                            type: 'scatter',
+                            mode: 'lines+markers',
+                            name: 'Temperature 3',
+                            line: { color: 'green' }
+                        },
+                        {
+                            x: data.temperature_history.map(entry => entry.time),
+                            y: data.temperature_history.map(entry => entry.temperature4),
+                            type: 'scatter',
+                            mode: 'lines+markers',
+                            name: 'Temperature 4',
+                            line: { color: 'yellow' }
+                        }
+                    ], { title: 'График температуры с датчиков', xaxis: { title: 'Время' }, yaxis: { title: 'Температура' } });
                 });
         }
+
+        // Автоматическое обновление каждую минуту
+        setInterval(updateData, 1200000);
+
+        // Инициализация графика
+        updateData();
     </script>
 </body>
 </html>
