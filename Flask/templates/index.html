@@ -8,7 +8,7 @@
 <body>
     <h1>Показатели температуры</h1>
     <ul>
-        {% for time, temperature in zip(temperature_data['time'], temperature_data['temperature']) %}
+        {% for time, temperature in temperature_data %}
             <li>{{ time }} минута: {{ temperature }}°C</li>
         {% endfor %}
     </ul>
