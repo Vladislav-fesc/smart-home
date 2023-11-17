@@ -3,16 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Показатели температуры</title>
+    <title>Sensor Data</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>Показатели температуры</h1>
+    <h1>Sensor Data</h1>
+
+    <h2>Temperature Sensors</h2>
     <ul>
-        {% for time, temperature in zip(temperature_data['time'], temperature_data['temperature']) %}
-            <li>{{ time }} минута: {{ temperature }}°C</li>
-        {% endfor %}
+        <li>Temperature 1: <span id="temperature1"></span> °C</li>
+        <li>Temperature 2: <span id="temperature2"></span> °C</li>
+        <li>Temperature 3: <span id="temperature3"></span> °C</li>
+        <li>Temperature 4: <span id="temperature4"></span> °C</li>
     </ul>
-    <img src="data:image/png;base64,{{ plot_image }}" alt="График температуры">
+
+    <h2>Light Control</h2>
+    <p>Light Status: <span id="light-status"></span></p>
+    <button onclick="updateData()">Toggle Light</button>
+
+    <div id="plot"></div>
+
+    <script>
+        function updateData() {
+            fetch('/update_data', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('temperature1').innerText = data.sensor_data.temperature1;
+                    document.getElementById('temperature2').innerText = data.sensor_data.temperature2;
+                    document.getElementById('temperature3').innerText = data.sensor_data.temperature3;
+                    document.getElementById('temperature4').innerText = data.sensor_data.temperature4;
+                    document.getElementById('light-status').innerText = data.light_status ? 'On' : 'Off';
+
+                    Plotly.newPlot('plot', [{
+                        x: data.time_history,
+                        y: data.temperature_history,
+                        type: 'scatter',
+                        mode: 'lines+markers',
+                        name: 'Temperature'
+                    }], {title: 'Temperature History', xaxis: {title: 'Time'}, yaxis: {title: 'Temperature'}});
+                });
+        }
+    </script>
 </body>
 </html>
-

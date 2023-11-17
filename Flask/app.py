@@ -1,39 +1,51 @@
-from flask import Flask, render_template
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
+from flask import Flask, render_template, jsonify
+from datetime import datetime
 import random
+import plotly
+import plotly.graph_objs as go
 
 app = Flask(__name__)
 
-# Генерация случайных данных для температуры и времени
-def generate_data():
-    data = {'temperature': [], 'time': []}
-    current_temperature = 25.0  # начальная температура
-    for i in range(10):  # 10 точек данных для примера
-        current_temperature += random.uniform(-1, 1)  # случайное изменение температуры
-        data['temperature'].append(round(current_temperature, 2))
-        data['time'].append(i + 1)  # минуты
-    return data
+# Имитация данных с датчиков
+sensor_data = {
+    'temperature1': 25.0,
+    'temperature2': 22.5,
+    'temperature3': 24.0,
+    'temperature4': 23.5
+}
 
-# Создание графика
-def create_plot(data):
-    plt.plot(data['time'], data['temperature'], marker='o')
-    plt.title('Показатели температуры')
-    plt.xlabel('Время (минуты)')
-    plt.ylabel('Температура (°C)')
-    plt.grid(True)
-    # Сохранение графика в байтовом представлении
-    image_stream = BytesIO()
-    plt.savefig(image_stream, format='png')
-    plt.close()
-    return base64.b64encode(image_stream.getvalue()).decode('utf-8')
+light_status = False
+temperature_history = []
+time_history = []
 
 @app.route('/')
 def index():
-    data = generate_data()
-    plot_image = create_plot(data)
-    return render_template('index.html', temperature_data=data, plot_image=plot_image)
+    return render_template('index.html', sensor_data=sensor_data, light_status=light_status)
+
+@app.route('/update_data', methods=['POST'])
+def update_data():
+    global temperature_history, time_history, light_status
+
+    # Обновление данных с датчиков
+    for sensor in sensor_data:
+        sensor_data[sensor] = round(sensor_data[sensor] + (0.5 - 1.0 * random.random()), 2)
+
+    # Добавление новых данных в историю
+    current_time = datetime.now().strftime('%H:%M:%S')
+    time_history.append(current_time)
+    temperature_history.append(sensor_data['temperature1'])
+
+    # Ограничение истории в 20 точках
+    if len(temperature_history) > 20:
+        temperature_history = temperature_history[-20:]
+        time_history = time_history[-20:]
+
+    # Обновление статуса света (для примера, используем случайное значение)
+    light_status = not light_status
+
+    # Возвращение данных в формате JSON для обновления веб-страницы
+    return jsonify({'sensor_data': sensor_data, 'light_status': light_status, 'time_history': time_history, 'temperature_history': temperature_history})
 
 if __name__ == '__main__':
     app.run(debug=True)
+
