@@ -29,7 +29,7 @@ def update_data():
         sensor_data[sensor] = round(sensor_data[sensor] + (0.5 - 1.0 * random.random()), 2)
 
     # Добавление новых данных в историю
-    current_time = datetime.now().strftime('%H:%M:%S')
+    current_time = datetime.now().strftime('%H:%M')
     temperature_history.append({
         'time': current_time,
         'temperature1': sensor_data['temperature1'],
@@ -49,3 +49,4 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
+                
