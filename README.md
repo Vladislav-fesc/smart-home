@@ -1,15 +1,16 @@
-SMART--HOME
+# Smart home
+Проект для обратки датчиков умного дома
 
-Данный проект предназначен для того
+## Project
 
-Для чего нужен данный проект?
+- [api](https://github.com/Vladislav-fesc/smart-home-api.git)
+- [web](https://github.com/Vladislav-fesc/smart-home-web.git)
+- [ios](https://github.com/Vladislav-fesc/smart-home-ios.git)
+- [android](https://github.com/Vladislav-fesc/smart-home-android.git)
 
-Участники
+## Tems
 
-Фещуков Влад (https://github.com/Vladislav-fesc)
-
-Кобелева Анастасия (https://github.com/Nastyaqqq)
-
-Першина Софья 
-
-Сень Вера
+- Фещуков Влад (https://github.com/Vladislav-fesc)
+- Кобелева Анастасия (https://github.com/Nastyaqqq)
+- Першина Софья 
+- Сень Вера
