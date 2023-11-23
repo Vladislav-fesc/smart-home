@@ -10,7 +10,7 @@
 
 ## Tems
 
-- Фещуков Влад (https://github.com/Vladislav-fesc)
-- Кобелева Анастасия (https://github.com/Nastyaqqq)
+- [Фещуков Влад](https://github.com/Vladislav-fesc)
+- [Кобелева Анастасия](https://github.com/Nastyaqqq)
 - Першина Софья 
 - Сень Вера
