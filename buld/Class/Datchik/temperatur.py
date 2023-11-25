@@ -1,6 +1,6 @@
+from Class.Datchik.Sensor import Sensor
 import random
 from math import log
-from Class.Datchik.Sensor import Sensor
 class TemperatureSensor(Sensor):
 
   def __init__(self, sensor_id, name, floor_number):
